@@ -23,7 +23,7 @@ export default abstract class BlockTeam {
 
     private m_BlockList : Array<BaseBlock>;
     protected m_iIndexPos : number = 0;
-    private m_Pos : Vector2Int;
+    private m_Pos : Vector2Int = new Vector2Int();
     protected m_BTType : BlockTeamType = BlockTeamType.BTT_None;
     public Rot():void
     {

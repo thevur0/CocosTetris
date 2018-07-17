@@ -8,6 +8,6 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 export class Vector2Int {
-    x: number;
-    y: number;
+    x: number = 0;
+    y: number = 0;
 }

@@ -44,18 +44,16 @@ export class BlockWall extends cc.Component {
     static m_BlockTeamType:Array<BlockTeam> = new Array<BlockTeam>();
     static BlockWall()
     {
-        this.m_BlockTeamType.push(new BlockTeam_I());
-        this.m_BlockTeamType.push(new BlockTeam_J());
-        this.m_BlockTeamType.push(new BlockTeam_L());
-        this.m_BlockTeamType.push(new BlockTeam_O());
-        this.m_BlockTeamType.push(new BlockTeam_P());
-        this.m_BlockTeamType.push(new BlockTeam_Q());
-        this.m_BlockTeamType.push(new BlockTeam_T());
-        console.log("static BlockWall");
-        
+        BlockWall.m_BlockTeamType.push(new BlockTeam_I());
+        BlockWall.m_BlockTeamType.push(new BlockTeam_J());
+        BlockWall.m_BlockTeamType.push(new BlockTeam_L());
+        BlockWall.m_BlockTeamType.push(new BlockTeam_O());
+        BlockWall.m_BlockTeamType.push(new BlockTeam_P());
+        BlockWall.m_BlockTeamType.push(new BlockTeam_Q());
+        BlockWall.m_BlockTeamType.push(new BlockTeam_T());
     }
 
-    m_WallData : number[][];
+    m_WallData : number[][] = [];
     m_CurBlockTeam:BlockTeam = null;
     m_DropDownBT:BlockTeam = null;
     m_BlockTeamQueue: Queue<BlockTeam> = new Queue<BlockTeam>();
@@ -139,7 +137,6 @@ GetRandomInt(min: number, max: number): number {
     EnqueueBlockTeam():void
     {
         var iIndex:number = this.GetRandomInt(0, BlockWall.m_BlockTeamType.length);
-        console.log(iIndex);
         var scrBt = BlockWall.m_BlockTeamType[iIndex];
         var bt = scrBt.Clone();
         this.m_BlockTeamQueue.enqueue(bt);
@@ -185,7 +182,7 @@ GetRandomInt(min: number, max: number): number {
     GetValue( iX:number, iY:number, iValue:number):boolean
     {
         iValue = 0;
-		if (iX >= this.GetWidth() || iY >= this.GetHeight() || iX<0 || iY<0)
+		if (iX >= this.GetWidth() || iY >= this.GetHeight() || iX<0 || iY<0 || this.m_WallData.length == 0)
             return false;
 
         iValue = this.m_WallData[iX][iY];

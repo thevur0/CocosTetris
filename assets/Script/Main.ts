@@ -1,5 +1,12 @@
 import RenderUtil from "./Render/RenderUtil";
 import { BlockWall } from "./Logic/BlockWall";
+import BlockTeam_I from "./Logic/BlockTeam_I";
+import BlockTeam_J from "./Logic/BlockTeam_J";
+import BlockTeam_T from "./Logic/BlockTeam_T";
+import BlockTeam_O from "./Logic/BlockTeam_O";
+import BlockTeam_L from "./Logic/BlockTeam_L";
+import BlockTeam_P from "./Logic/BlockTeam_P";
+import BlockTeam_Q from "./Logic/BlockTeam_Q";
 
 // Learn TypeScript:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -19,14 +26,11 @@ export default class Main extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.node.on(cc.Node.EventType.TOUCH_START, this.CheckMouse, this.node);
+        this.node.on(cc.Node.EventType.TOUCH_START, this.CheckMouse, this);
 
-         this.node.on(cc.Node.EventType.TOUCH_MOVE,function(event){
-         }, this.node);
+         this.node.on(cc.Node.EventType.TOUCH_MOVE,this.CheckMouse, this);
 
-         this.node.on(cc.Node.EventType.TOUCH_END, function(event){
-
-         }, this.node);   
+         this.node.on(cc.Node.EventType.TOUCH_END, this.CheckMouse, this);   
     }
 
 
@@ -38,9 +42,20 @@ export default class Main extends cc.Component {
 	m_Sprites : cc.Sprite[][] =[];
     m_BlockWall:BlockWall = new BlockWall();
 
+    InitBT()
+    {
+        BlockWall.BlockWall();
+        BlockTeam_I.BlockTeam_I();
+        BlockTeam_T.BlockTeam_T();
+        BlockTeam_O.BlockTeam_O();
+        BlockTeam_J.BlockTeam_J();
+        BlockTeam_L.BlockTeam_L();
+        BlockTeam_P.BlockTeam_P();
+        BlockTeam_Q.BlockTeam_Q();
+    }
 	InitSprites()
 	{
-        BlockWall.BlockWall();
+        
         this.m_BlockItem = cc.find("Canvas/blockitem");
 
         var tranParent:cc.Node = cc.find("Canvas/blockparent");
@@ -62,6 +77,7 @@ export default class Main extends cc.Component {
 	}
 	start () {
 
+        this.InitBT();
 		this.InitSprites();
         this.InitTimer();
 
@@ -141,7 +157,8 @@ export default class Main extends cc.Component {
 	m_bMove:boolean = false;
     CheckMouse(event : cc.Event.EventTouch)
     {
-        var touchVec : cc.Vec2 =  this.node.convertTouchToNodeSpace(event.touch);
+        var touchVec : cc.Vec2 =  event.touch.getDelta();
+        //var touchVec : cc.Vec2 =  this.node.convertTouchToNodeSpace(event.touch);
         if (event.type == cc.Node.EventType.TOUCH_START)
         {
 			this.m_bMove = false;
@@ -155,9 +172,9 @@ export default class Main extends cc.Component {
         if (event.type == cc.Node.EventType.TOUCH_MOVE)
         {
             //this.m_fSaveTime += cc.delayTime(1).;
-            if (this.m_fSaveTime > this.m_fCheckTime)
+            //if (this.m_fSaveTime > this.m_fCheckTime)
             {
-                var vDis: cc.Vec2;
+                var vDis: cc.Vec2 = cc.Vec2.ZERO;
                 vDis.x = touchVec.x - this.m_BeginPosition.x;
                 vDis.y = touchVec.y - this.m_BeginPosition.y;
 				if (Math.abs(vDis.x) > this.m_fMoveDis && Math.abs(vDis.y) < Math.abs(vDis.x))
@@ -176,7 +193,7 @@ export default class Main extends cc.Component {
             this.m_bGetBeginPos = true;
 			if (!this.m_bMove)
             {
-                var vDis : cc.Vec2;
+                var vDis : cc.Vec2 = cc.Vec2.ZERO;
                 vDis.x  = touchVec.x - this.m_BeginPosition.x;
                 vDis.y  = touchVec.y - this.m_BeginPosition.y;
                 if (Math.abs(vDis.x) > Math.abs(vDis.x) * 3.0 / 2.0)

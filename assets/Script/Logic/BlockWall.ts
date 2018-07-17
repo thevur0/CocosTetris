@@ -51,6 +51,8 @@ export class BlockWall extends cc.Component {
         this.m_BlockTeamType.push(new BlockTeam_P());
         this.m_BlockTeamType.push(new BlockTeam_Q());
         this.m_BlockTeamType.push(new BlockTeam_T());
+        console.log("static BlockWall");
+        
     }
 
     m_WallData : number[][];
@@ -137,6 +139,7 @@ GetRandomInt(min: number, max: number): number {
     EnqueueBlockTeam():void
     {
         var iIndex:number = this.GetRandomInt(0, BlockWall.m_BlockTeamType.length);
+        console.log(iIndex);
         var scrBt = BlockWall.m_BlockTeamType[iIndex];
         var bt = scrBt.Clone();
         this.m_BlockTeamQueue.enqueue(bt);

@@ -30,22 +30,23 @@ export default class Main extends cc.Component {
     }
 
 
-    //update (dt) {this.FixedUpdate();}
+    update (dt) {this.FixedUpdate();}
 
 
 	// Use this for initialization
 	m_BlockItem : cc.Node;
-	m_Sprites : cc.Sprite[][] ;
+	m_Sprites : cc.Sprite[][] =[];
     m_BlockWall:BlockWall = new BlockWall();
 
 	InitSprites()
 	{
+        BlockWall.BlockWall();
         this.m_BlockItem = cc.find("Canvas/blockitem");
 
-		var tranParent:cc.Node = cc.find("anvas/blockparent");
-		this.m_Sprites = new cc.Sprite[this.m_BlockWall.GetWidth()][this.m_BlockWall.GetHeight()];
+        var tranParent:cc.Node = cc.find("Canvas/blockparent");
 		for (var i = 0; i < this.m_BlockWall.GetWidth();i++)
 		{
+            this.m_Sprites[i] = [];
 			for (var j = 0; j < this.m_BlockWall.GetHeight();j++)
 			{
                 var go = new cc.Node();

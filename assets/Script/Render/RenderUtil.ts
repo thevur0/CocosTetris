@@ -31,13 +31,13 @@ export default class RenderUtil {
 		{
 			for (var j = 0; j < bw.GetHeight();j++)
 			{
-				var btColor : BlockColor;
+				var btColor : BlockColor[]=[BlockColor.None];
 				if (bw.GetBlockColor(i, j, btColor))
 				{
-					sp[i][j].enabled = btColor != BlockColor.None;
-                    if(this.m_dicColor.containsKey(btColor))
+					sp[i][j].enabled = btColor[0] != BlockColor.None;
+                    if(this.m_dicColor.containsKey(btColor[0]))
                     {
-                        sp[i][j].node.color = this.m_dicColor.getValue(btColor);
+                        sp[i][j].node.color = this.m_dicColor.getValue(btColor[0]);
                     }
                     
 				}

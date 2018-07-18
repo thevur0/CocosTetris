@@ -53,21 +53,22 @@ export class BlockWall extends cc.Component {
         BlockWall.m_BlockTeamType.push(new BlockTeam_T());
     }
 
-    m_WallData : number[][] = [];
+    m_WallData : number[][]= []; 
     m_CurBlockTeam:BlockTeam = null;
     m_DropDownBT:BlockTeam = null;
     m_BlockTeamQueue: Queue<BlockTeam> = new Queue<BlockTeam>();
     
     Reset():void
     {
-        // for (var i = 0; i < m_WallData.GetLength(0); i++)
-        // {
-        //     for (int j = 0; j < m_WallData.GetLength(1); j++)
-        //     {
-        //         m_WallData[i, j] = 0;
-        //     }
-        // }
-        this.m_WallData = [];
+        // var a:number[][] = [[]]; 
+        for (var i = 0; i < this.GetWidth(); i++)
+        {
+            this.m_WallData[i] = [] 
+            for (var j = 0; j < this.GetHeight(); j++)
+            {
+                this.m_WallData[i][j] = 0;
+            }
+        }
         this.m_CurBlockTeam = null;
         this.m_DropDownBT = null;
         this.m_BlockTeamQueue.clear();
@@ -103,15 +104,15 @@ export class BlockWall extends cc.Component {
         {
             for (var j:number = 0; j < bt.GetHeight(); j++)
             {
-                var iBTValue:number = 0;
-                var iWallValue:number = 0;
+                var iBTValue:number[] = [0];
+                var iWallValue:number[] = [0];
                 if (bt.GetValue(i, j, iBTValue))
                 {
-					if(iBTValue != 0)
+					if(iBTValue[0] != 0)
                     {
 						if(this.GetValue(i + vPos.x, j + vPos.y, iWallValue))
 						{
-							if (iWallValue != 0)
+							if (iWallValue[0] != 0)
                                 return true;
 						}
 						else
@@ -149,6 +150,7 @@ GetRandomInt(min: number, max: number): number {
         this.InitBlockTeamPos(bt);
         this.m_CurBlockTeam = bt;
         this.m_DropDownBT = this.m_CurBlockTeam.Clone();
+        this.m_CurBlockTeam.Target = this;
         this.m_CurBlockTeam.OnBlockMove = this.OnCurBlockTeamUpdate;
         this.m_CurBlockTeam.OnBlockRot = this.OnCurBlockTeamUpdate;
         this.OnCurBlockTeamUpdate();
@@ -180,24 +182,24 @@ GetRandomInt(min: number, max: number): number {
         return 20;
     }
 
-    GetValue( iX:number, iY:number, iValue:number):boolean
+    GetValue( iX:number, iY:number, iValue:number[]):boolean
     {
-        iValue = 0;
+        iValue[0] = 0;
 		if (iX >= this.GetWidth() || iY >= this.GetHeight() || iX<0 || iY<0 || this.m_WallData.length == 0)
             return false;
 
-        iValue = this.m_WallData[iX][iY];
+        iValue[0] = this.m_WallData[iX][iY];
         return true;
     }
 
-	public GetBlockColor( iX:number, iY:number,  blockColor: BlockColor):boolean
+	public GetBlockColor( iX:number, iY:number,  blockColor: BlockColor[]):boolean
 	{
-		blockColor = BlockColor.None;
-	    var iValue:number = 0;
+		blockColor[0] = BlockColor.None;
+	    var iValue:number[] = [0];
 		if(this.GetValue(iX,iY, iValue))
 		{
-            if (iValue != 0)
-                blockColor = BlockColor.Gray;
+            if (iValue[0] != 0)
+                blockColor[0] = BlockColor.Gray;
             else
             {
 				if (this.m_DropDownBT != null)
@@ -206,8 +208,8 @@ GetRandomInt(min: number, max: number): number {
                     var iBTY = iY - this.m_DropDownBT.GetPos().y;
                     if (this.m_DropDownBT.GetValue(iBTX, iBTY, iValue))
                     {
-                        if (iValue != 0)
-                            blockColor = BlockColor.Yellow;
+                        if (iValue[0] != 0)
+                            blockColor[0] = BlockColor.Yellow;
                     }
                 }
 
@@ -217,8 +219,8 @@ GetRandomInt(min: number, max: number): number {
                     var iBTY = iY - this.m_CurBlockTeam.GetPos().y;
 					if (this.m_CurBlockTeam.GetValue(iBTX, iBTY, iValue))
                     {
-                        if (iValue != 0)
-                            blockColor = BlockColor.Red;
+                        if (iValue[0] != 0)
+                            blockColor[0] = BlockColor.Red;
                     }
                 } 
             }
@@ -329,11 +331,11 @@ GetRandomInt(min: number, max: number): number {
         {
             for (var j = 0; j < bt.GetHeight(); j++)
             {
-                var iBTValue : number = 0;
+                var iBTValue : number[] = [0];
                 if (bt.GetValue(i, j,  iBTValue) )
                 {
-                    if (iBTValue == 1)
-                        this.SetValue(i + vPos.x, j + vPos.y, iBTValue);
+                    if (iBTValue[0] == 1)
+                        this.SetValue(i + vPos.x, j + vPos.y, iBTValue[0]);
                 }
             }
         }
@@ -348,10 +350,10 @@ GetRandomInt(min: number, max: number): number {
 			var bContuine = false;
 			for (var i = 0;i<this.GetWidth();i++)
             {
-                var iValue: number = 0;
+                var iValue: number[] = [0];
 				if (this.GetValue(i, iIndex,iValue))
                 {
-					if(iValue == 0)
+					if(iValue[0] == 0)
 					{
 						bContuine = true;
 						break;

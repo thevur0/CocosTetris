@@ -17,9 +17,9 @@ interface ActionBTRot
 @ccclass
 export default abstract class BlockTeam {
 
-
-    public  OnBlockMove :ActionBTMove;
-    public  OnBlockRot : ActionBTRot;
+    public  Target:any = null;
+    public  OnBlockMove :ActionBTMove = null;
+    public  OnBlockRot : ActionBTRot = null;
 
     private m_BlockList : Array<BaseBlock>;
     protected m_iIndexPos : number = 0;
@@ -30,8 +30,12 @@ export default abstract class BlockTeam {
         this.m_iIndexPos++;
 		if (this.m_iIndexPos >= this.GetRotData().length)
             this.m_iIndexPos = 0;
-        if (this.OnBlockRot != null)
-            this.OnBlockRot();
+        if(this.Target!=null)
+        {
+            this.Target.OnBlockRot = this.OnBlockRot;
+            if (this.Target.OnBlockRot != null)
+                this.Target.OnBlockRot();
+        }
     }
 
     private CurrentPos(): number[][]
@@ -102,28 +106,36 @@ export default abstract class BlockTeam {
         bt.SetRotIndex(this.m_iIndexPos);
     }
 
-    public GetValue(iX:number, iY:number,iValue:number):boolean
+    public GetValue(iX:number, iY:number,iValue:number[]):boolean
     {
-        iValue = 0;
+        iValue[0] = 0;
 		if (iX >= this.GetWidth() || iY >= this.GetHeight() || iX < 0 || iY<0)
             return false;
 
-		iValue = this.CurrentPos()[iX][iY];
+		iValue[0] = this.CurrentPos()[iX][iY];
         return true;
     }
 
     public MoveLeft():void
     {
         this.m_Pos.x -= 1;
-        if(this.OnBlockMove!=null)
-            this.OnBlockMove();
+        if(this.Target!=null)
+        {
+            this.Target.OnBlockMove=this.OnBlockMove;
+            if(this.Target.OnBlockMove!=null)
+                this.Target.OnBlockMove();
+        }
     }
 
     public MoveRight():void
     {
         this.m_Pos.x += 1;
-        if (this.OnBlockMove != null)
-            this.OnBlockMove();
+        if(this.Target!=null)
+        {
+            this.Target.OnBlockMove=this.OnBlockMove;
+            if (this.Target.OnBlockMove != null)
+                this.Target.OnBlockMove();
+        }
     }
 
     public MoveDown():void
@@ -134,9 +146,13 @@ export default abstract class BlockTeam {
    
 	public SetRotIndex(iIndex:number):void
 	{
-		this.m_iIndexPos = iIndex;
-        if (this.OnBlockRot != null)
-            this.OnBlockRot();
+        this.m_iIndexPos = iIndex;
+        if(this.Target!=null)
+        {
+            this.Target.OnBlockRot=this.OnBlockRot;
+            if (this.Target.OnBlockRot != null)
+                this.Target.OnBlockRot();
+        }
 
     }
 

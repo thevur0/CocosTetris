@@ -103,7 +103,8 @@ export class BlockWall extends cc.Component {
         {
             for (var j:number = 0; j < bt.GetHeight(); j++)
             {
-                var iBTValue:number, iWallValue:number;
+                var iBTValue:number = 0;
+                var iWallValue:number = 0;
                 if (bt.GetValue(i, j, iBTValue))
                 {
 					if(iBTValue != 0)
@@ -136,7 +137,7 @@ GetRandomInt(min: number, max: number): number {
 
     EnqueueBlockTeam():void
     {
-        var iIndex:number = this.GetRandomInt(0, BlockWall.m_BlockTeamType.length);
+        var iIndex:number = this.GetRandomInt(0, BlockWall.m_BlockTeamType.length-1);
         var scrBt = BlockWall.m_BlockTeamType[iIndex];
         var bt = scrBt.Clone();
         this.m_BlockTeamQueue.enqueue(bt);
@@ -328,7 +329,7 @@ GetRandomInt(min: number, max: number): number {
         {
             for (var j = 0; j < bt.GetHeight(); j++)
             {
-                var iBTValue;
+                var iBTValue : number = 0;
                 if (bt.GetValue(i, j,  iBTValue) )
                 {
                     if (iBTValue == 1)
@@ -347,7 +348,7 @@ GetRandomInt(min: number, max: number): number {
 			var bContuine = false;
 			for (var i = 0;i<this.GetWidth();i++)
             {
-                var iValue;
+                var iValue: number = 0;
 				if (this.GetValue(i, iIndex,iValue))
                 {
 					if(iValue == 0)

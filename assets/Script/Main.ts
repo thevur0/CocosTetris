@@ -57,7 +57,7 @@ export default class Main extends cc.Component {
 	{
         
         this.m_BlockItem = cc.find("Canvas/blockitem");
-
+        var spriteFrame:cc.SpriteFrame = this.m_BlockItem.getComponent(cc.Sprite).spriteFrame;
         var tranParent:cc.Node = cc.find("Canvas/blockparent");
 		for (var i = 0; i < this.m_BlockWall.GetWidth();i++)
 		{
@@ -66,11 +66,13 @@ export default class Main extends cc.Component {
 			{
                 var go = new cc.Node();
                 tranParent.addChild(go);
-				this.m_Sprites[i][j] = go.addComponent(cc.Sprite);
-				this.m_Sprites[i][j].enabled = false;
-				var pos:cc.Vec2 = go.position;
-				pos.x = pos.x + i * 0.40;
-				pos.y = pos.y - j * 0.40;
+                this.m_Sprites[i][j] = go.addComponent(cc.Sprite);
+                this.m_Sprites[i][j].enabled = false;
+                this.m_Sprites[i][j].spriteFrame = spriteFrame;
+                go.setContentSize(36,36);
+                var pos:cc.Vec2 = this.m_BlockItem.position;
+				pos.x = pos.x + i * 36;
+                pos.y = pos.y - j * 36;
 				go.position = pos;
 			}
 		}

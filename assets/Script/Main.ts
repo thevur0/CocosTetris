@@ -44,6 +44,7 @@ export default class Main extends cc.Component {
 
     InitBT()
     {
+        RenderUtil.RenderUtil();
         BlockWall.BlockWall();
         BlockTeam_I.BlockTeam_I();
         BlockTeam_T.BlockTeam_T();
@@ -69,7 +70,7 @@ export default class Main extends cc.Component {
                 this.m_Sprites[i][j] = go.addComponent(cc.Sprite);
                 this.m_Sprites[i][j].enabled = false;
                 this.m_Sprites[i][j].spriteFrame = spriteFrame;
-                go.setContentSize(36,36);
+                go.setContentSize(35,35);
                 var pos:cc.Vec2 = this.m_BlockItem.position;
 				pos.x = pos.x + i * 36;
                 pos.y = pos.y - j * 36;

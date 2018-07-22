@@ -112,7 +112,8 @@ export default abstract class BlockTeam {
 		if (iX >= this.GetWidth() || iY >= this.GetHeight() || iX < 0 || iY<0)
             return false;
 
-		iValue[0] = this.CurrentPos()[iX][iY];
+        var pos = this.CurrentPos();
+		iValue[0] = pos[iX][iY];
         return true;
     }
 

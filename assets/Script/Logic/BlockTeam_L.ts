@@ -23,7 +23,7 @@ export default class BlockTeam_L extends BlockTeam  {
                 [0,0,1,0],
                 [0,0,1,0]];
 
-        this.ms_RotPosData.push(vPos);
+                BlockTeam_L.ms_RotPosData.push(vPos);
         
         var vPos : number[][] = [
             [0,0,0,0],
@@ -31,7 +31,7 @@ export default class BlockTeam_L extends BlockTeam  {
             [1,1,1,1],
             [0,0,0,0]];
 
-        this.ms_RotPosData.push(vPos);
+            BlockTeam_L.ms_RotPosData.push(vPos);
     }
     public Clone():BlockTeam
     {

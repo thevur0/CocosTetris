@@ -20,9 +20,9 @@ export default class RenderUtil {
     private static  m_dicColor:Dictionary<BlockColor, cc.Color> = new Dictionary<BlockColor, cc.Color>();
     static RenderUtil()
     {
-		this.m_dicColor[BlockColor.Gray] = cc.Color.GRAY;
-        this.m_dicColor[BlockColor.Red] = cc.Color.RED;
-		this.m_dicColor[BlockColor.Yellow] = cc.Color.YELLOW;
+		RenderUtil.m_dicColor[BlockColor.Gray] = cc.Color.GRAY;
+        RenderUtil.m_dicColor[BlockColor.Red] = cc.Color.RED;
+		RenderUtil.m_dicColor[BlockColor.Yellow] = cc.Color.YELLOW;
 		
     }
     public static  UpdateBlockWall( bw:BlockWall, sp: cc.Sprite[][])

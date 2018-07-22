@@ -86,16 +86,18 @@ export class BlockWall extends cc.Component {
 		if (bt == null)
 			return true;
         var vPos:Vector2Int = bt.GetPos();
+        var iX = vPos.x;
+        var iY = vPos.y;
         switch (eBTMove)
         {
             case BT_Move_Type.BTM_Left:
-                vPos.x -= 1;
+                iX = vPos.x- 1;
                 break;
             case BT_Move_Type.BTM_Right:
-                vPos.x += 1;
+                iX = vPos.x + 1;
                 break;
             case BT_Move_Type.BTM_Down:
-                vPos.y += 1;
+                iY = vPos.y + 1;
                 break;
             default:
                 break;
@@ -110,7 +112,7 @@ export class BlockWall extends cc.Component {
                 {
 					if(iBTValue[0] != 0)
                     {
-						if(this.GetValue(i + vPos.x, j + vPos.y, iWallValue))
+						if(this.GetValue(i + iX, j + iY, iWallValue))
 						{
 							if (iWallValue[0] != 0)
                                 return true;

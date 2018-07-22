@@ -22,15 +22,15 @@ export default class BlockTeam_I extends BlockTeam  {
                 [0,0,1,0],
                 [0,0,1,0]];
 
-        this.ms_RotPosData.push(vPos);
+                BlockTeam_I.ms_RotPosData.push(vPos);
         
-        var vPos : number[][] = [
+        var vPos1 : number[][] = [
             [0,0,0,0],
             [0,0,0,0],
             [1,1,1,1],
             [0,0,0,0]];
 
-        this.ms_RotPosData.push(vPos);
+            BlockTeam_I.ms_RotPosData.push(vPos1);
     }
     public Clone():BlockTeam
     {

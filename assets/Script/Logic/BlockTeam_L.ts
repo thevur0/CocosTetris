@@ -18,20 +18,36 @@ export default class BlockTeam_L extends BlockTeam  {
     static BlockTeam_L()
     {
         var vPos : number[][] = [
-                [0,0,1,0],
-                [0,0,1,0],
-                [0,0,1,0],
-                [0,0,1,0]];
+                [0,1,0,0],
+                [0,1,0,0],
+                [0,1,1,0],
+                [0,0,0,0]];
 
                 BlockTeam_L.ms_RotPosData.push(vPos);
         
         var vPos : number[][] = [
+            [0,0,1,0],
+            [1,1,1,0],
             [0,0,0,0],
-            [0,0,0,0],
-            [1,1,1,1],
             [0,0,0,0]];
 
             BlockTeam_L.ms_RotPosData.push(vPos);
+
+            var vPos : number[][] = [
+                [1,1,0,0],
+                [0,1,0,0],
+                [0,1,0,0],
+                [0,0,0,0]];
+    
+                BlockTeam_L.ms_RotPosData.push(vPos);
+
+                var vPos : number[][] = [
+                    [0,0,0,0],
+                    [1,1,1,0],
+                    [1,0,0,0],
+                    [0,0,0,0]];
+        
+                    BlockTeam_L.ms_RotPosData.push(vPos);
     }
     public Clone():BlockTeam
     {

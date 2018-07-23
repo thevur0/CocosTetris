@@ -20,10 +20,9 @@ export default class RenderUtil {
     private static  m_dicColor:Dictionary<BlockColor, cc.Color> = new Dictionary<BlockColor, cc.Color>();
     static RenderUtil()
     {
-		RenderUtil.m_dicColor[BlockColor.Gray] = cc.Color.GRAY;
-        RenderUtil.m_dicColor[BlockColor.Red] = cc.Color.RED;
-		RenderUtil.m_dicColor[BlockColor.Yellow] = cc.Color.YELLOW;
-		
+		RenderUtil.m_dicColor.setValue(BlockColor.Gray,cc.Color.GRAY);
+        RenderUtil.m_dicColor.setValue(BlockColor.Red, cc.Color.RED);
+		RenderUtil.m_dicColor.setValue(BlockColor.Yellow, cc.Color.YELLOW);
     }
     public static  UpdateBlockWall( bw:BlockWall, sp: cc.Sprite[][])
 	{
@@ -35,9 +34,10 @@ export default class RenderUtil {
 				if (bw.GetBlockColor(i, j, btColor))
 				{
 					sp[i][j].enabled = btColor[0] != BlockColor.None;
-                    if(this.m_dicColor.containsKey(btColor[0]))
+					var dicColor = RenderUtil.m_dicColor;
+                    if(dicColor.containsKey(btColor[0]))
                     {
-                        sp[i][j].node.color = this.m_dicColor.getValue(btColor[0]);
+                        sp[i][j].node.color = dicColor.getValue(btColor[0]);
                     }
                     
 				}

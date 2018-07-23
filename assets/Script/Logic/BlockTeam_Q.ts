@@ -19,16 +19,16 @@ export default class BlockTeam_Q extends BlockTeam  {
     {
         var vPos : number[][] = [
                 [0,0,1,0],
-                [0,0,1,0],
-                [0,0,1,0],
-                [0,0,1,0]];
+                [,1,1,0],
+                [0,1,0,0],
+                [0,0,0,0]];
 
                 BlockTeam_Q.ms_RotPosData.push(vPos);
         
         var vPos1 : number[][] = [
             [0,0,0,0],
-            [0,0,0,0],
-            [1,1,1,1],
+            [1,1,0,0],
+            [0,1,1,0],
             [0,0,0,0]];
 
             BlockTeam_Q.ms_RotPosData.push(vPos1);

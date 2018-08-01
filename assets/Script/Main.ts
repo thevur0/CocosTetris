@@ -57,9 +57,9 @@ export default class Main extends cc.Component {
 	InitSprites()
 	{
         
-        this.m_BlockItem = cc.find("Canvas/blockitem");
+        this.m_BlockItem = cc.find("Canvas/frame/blockitem");
         var spriteFrame:cc.SpriteFrame = this.m_BlockItem.getComponent(cc.Sprite).spriteFrame;
-        var tranParent:cc.Node = cc.find("Canvas/blockparent");
+        var tranParent:cc.Node = cc.find("Canvas/frame/blockparent");
 		for (var i = 0; i < this.m_BlockWall.GetWidth();i++)
 		{
             this.m_Sprites[i] = [];
@@ -70,10 +70,10 @@ export default class Main extends cc.Component {
                 this.m_Sprites[i][j] = go.addComponent(cc.Sprite);
                 this.m_Sprites[i][j].enabled = false;
                 this.m_Sprites[i][j].spriteFrame = spriteFrame;
-                go.setContentSize(35,35);
+                go.setContentSize(46,46);
                 var pos:cc.Vec2 = this.m_BlockItem.position;
-				pos.x = pos.x + i * 36;
-                pos.y = pos.y - j * 36;
+				pos.x = pos.x + i * 48;
+                pos.y = pos.y - j * 48;
 				go.position = pos;
 			}
 		}
@@ -160,7 +160,7 @@ export default class Main extends cc.Component {
 	m_bMove:boolean = false;
     CheckMouse(event : cc.Event.EventTouch)
     {
-        var touchVec : cc.Vec2 =  event.touch.getDelta();
+        var touchVec : cc.Vec2 =  event.touch.getLocation();
         //var touchVec : cc.Vec2 =  this.node.convertTouchToNodeSpace(event.touch);
         if (event.type == cc.Node.EventType.TOUCH_START)
         {
@@ -199,7 +199,7 @@ export default class Main extends cc.Component {
                 var vDis : cc.Vec2 = cc.Vec2.ZERO;
                 vDis.x  = touchVec.x - this.m_BeginPosition.x;
                 vDis.y  = touchVec.y - this.m_BeginPosition.y;
-                if (Math.abs(vDis.x) > Math.abs(vDis.x) * 3.0 / 2.0)
+                if (Math.abs(vDis.y) > Math.abs(vDis.x) * 3.0 / 2.0)
                 {
                     this.OnDropDown();
                 }

@@ -176,7 +176,7 @@ GetRandomInt(min: number, max: number): number {
 
     public GetWidth():number
     {
-        return 12;
+        return 10;
     }
 
     public GetHeight():number
@@ -275,6 +275,9 @@ GetRandomInt(min: number, max: number): number {
         if (this.m_DropDownBT == null || this.m_CurBlockTeam == null)
             return;
         this.m_DropDownBT.CopyTo(this.m_CurBlockTeam);
+        this.Merge(this.m_CurBlockTeam);
+        this.m_CurBlockTeam = null;
+        this.m_DropDownBT = null;
 	}
 
     public OnRot()

@@ -21,7 +21,7 @@ export default class BlockTeam_T extends BlockTeam  {
                 [0,0,0,0],
                 [0,0,1,0],
                 [0,1,1,1],
-                [0,0,1,0]];
+                [0,0,0,0]];
 
                 BlockTeam_T.ms_RotPosData.push(vPos);
         

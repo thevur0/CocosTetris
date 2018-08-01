@@ -21,8 +21,8 @@ export default class RenderUtil {
     static RenderUtil()
     {
 		RenderUtil.m_dicColor.setValue(BlockColor.Gray,cc.Color.GRAY);
-        RenderUtil.m_dicColor.setValue(BlockColor.Red, cc.Color.RED);
-		RenderUtil.m_dicColor.setValue(BlockColor.Yellow, cc.Color.YELLOW);
+        RenderUtil.m_dicColor.setValue(BlockColor.Red, cc.color(230,80,80,255));
+		RenderUtil.m_dicColor.setValue(BlockColor.Yellow, cc.color(200,230,80,140));
     }
     public static  UpdateBlockWall( bw:BlockWall, sp: cc.Sprite[][])
 	{
